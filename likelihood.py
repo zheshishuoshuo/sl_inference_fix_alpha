@@ -193,8 +193,8 @@ def log_likelihood(
     """Compute the joint log-likelihood for all lenses."""
 
     mu0, beta, sigmaDM = theta
-    if sigmaDM <= 0 or sigmaDM > 2.0:
-        return -np.inf
+    # if sigmaDM <= 0 or sigmaDM > 2.0:
+    #     return -np.inf
 
     # A_eta = 1
 
@@ -204,7 +204,7 @@ def log_likelihood(
             return -np.inf
     except Exception:
         return -np.inf
-    A_eta = 1
+    # A_eta = 1
 
     logL = 0.0
     for grid, logM_obs in zip(grids, logM_sps_obs):

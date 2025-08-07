@@ -38,7 +38,7 @@ def main() -> None:
         nsteps=nsteps,
         nwalkers=20,
         initial_guess=np.array([12.6, 1.6, 0.3]),
-        backend_file="chains_eta_new_stage7.h5",
+        backend_file="chains_eta_new_stage.h5",
         parallel=True,
         nproc=mp.cpu_count() - 3,
     )
