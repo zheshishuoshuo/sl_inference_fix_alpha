@@ -21,19 +21,22 @@ if __package__ is None or __package__ == "":
     from compute_norm_acc.mock_generator.lens_solver import solve_single_lens
     from compute_norm_acc.mock_generator.lens_model import LensModel
     from compute_norm_acc.utils import selection_function
-    from compute_norm_acc.config import OBS_SCATTER_MAG
+    from compute_norm_acc.config import OBS_SCATTER_MAG, LOGALPHA_SPS
 else:
     from .mock_generator.mass_sampler import generate_samples, MODEL_PARAMS
     from .mock_generator.lens_solver import solve_single_lens
     from .mock_generator.lens_model import LensModel
     from .utils import selection_function
-    from .config import OBS_SCATTER_MAG
+    from .config import OBS_SCATTER_MAG, LOGALPHA_SPS
 
 
 def sample_lens_population(n_samples, zl=0.3, zs=2.0):
     """Generate lens population samples consistent with existing simulation."""
     data = generate_samples(n_samples)
-    logalpha_sps = np.random.normal(0.1, 0.05, n_samples)
+    # ``alpha_sps`` was previously sampled from a normal distribution.  We now
+    # adopt a fixed value configured globally to remove this source of
+    # stochasticity.
+    logalpha_sps = np.full(n_samples, LOGALPHA_SPS)
     logM_star = data["logM_star_sps"] + logalpha_sps
     logRe = data["logRe"]
     beta = np.random.rand(n_samples) ** 0.5
@@ -93,8 +96,6 @@ def ms_distribution(ms_grid, alpha_s=-1.3, ms_star=24.5):
     # if not (
     #     12.0 < mu0 < 14.0
     #     and 0 < sigmaDM < 1
-    #     and 0. < sigma_alpha < 1
-    #     and -0.3 < mu_alpha < 0.5
     #     and 0 < beta < 5
     # ):
 

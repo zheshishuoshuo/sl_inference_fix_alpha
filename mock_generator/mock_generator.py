@@ -3,6 +3,7 @@ import pandas as pd
 from .lens_properties import observed_data
 from tqdm import tqdm
 from .mass_sampler import generate_samples
+from ..config import LOGALPHA_SPS
 
 # SPS PARAMETER
 # M_star = alpha_sps * M_sps
@@ -85,9 +86,11 @@ def run_mock_simulation(
     m_s_star=24.5,
 ):
     beta_samp = np.random.rand(n_samples)**0.5
-    # alpha_sps = np.random.normal(loc=1.2, scale=0.2, size=n_samples)
-    # logalpha_sps_sample = np.log10(alpha_sps)
-    logalpha_sps_sample = np.random.normal(loc=0.1, scale=0.05, size=n_samples)  # Example logalpha_sps
+    # ``logalpha_sps_sample`` was previously drawn from a normal distribution
+    # to mimic scatter in the stellar mass-to-light ratio.  The simplified
+    # treatment adopted here uses a single fixed value, configured globally in
+    # :mod:`config`.
+    logalpha_sps_sample = np.full(n_samples, LOGALPHA_SPS)
     samples = generate_samples(n_samples, alpha_s=alpha_s, m_s_star=m_s_star)
 
     if process is None or process == 0:
