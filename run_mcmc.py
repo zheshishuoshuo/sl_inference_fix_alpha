@@ -44,8 +44,8 @@ def run_mcmc(
     nwalkers, nsteps:
         MCMC configuration.
     initial_guess:
-        Initial position of the walkers in parameter space.  Must have length 5
-        corresponding to ``(mu0, beta, sigmaDM, mu_alpha, sigma_alpha)``.
+        Initial position of the walkers in parameter space.  Must have length 3
+        corresponding to ``(mu0, beta, sigmaDM)``.
     backend_file:
         Filename or path for the HDF5 backend.  If a relative path is
         supplied, the file will be placed inside the ``chains`` directory.  The
@@ -83,9 +83,9 @@ def run_mcmc(
     # return sampler
 
 
-    ndim = 5
+    ndim = 3
     if initial_guess is None:
-        initial_guess = np.array([12.5, 2.0, 0.3, 0.1, 0.1])
+        initial_guess = np.array([12.5, 2.0, 0.3])
 
     # === 使用 pathlib 构建路径 ===
     base_dir = Path(__file__).parent.resolve()
