@@ -91,12 +91,21 @@ def log_prior(theta: Sequence[float]) -> float:
 
     mu0, beta, sigmaDM = theta
     if not (
-        10.0 < mu0 < 16.0
-        and 0 < sigmaDM < 10
-        and -5 < beta < 10
+        12.5 < mu0 < 14.5
+        and 0 < sigmaDM < 1
+        and 0 < beta < 5
     ):
         return -np.inf
     return 0.0
+
+    # mu0, beta, sigmaDM = theta
+    # if not (
+    #     10.0 < mu0 < 16.0
+    #     and 0 < sigmaDM < 10
+    #     and -5 < beta < 10
+    # ):
+    #     return -np.inf
+    # return 0.0
 
 
 def _single_lens_likelihood(

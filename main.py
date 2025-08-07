@@ -22,7 +22,7 @@ def main() -> None:
     config.OBS_SCATTER_STAR = scatter
 
     # Generate mock data for  samples
-    mock_lens_data, mock_observed_data = run_mock_simulation(100)
+    mock_lens_data, mock_observed_data = run_mock_simulation(3000)
     logM_sps_obs = mock_observed_data["logM_star_sps_observed"].values
 
     mock_lens_data.to_csv("mock_lens_data.csv", index=False)
@@ -37,10 +37,10 @@ def main() -> None:
         logM_sps_obs,
         nsteps=nsteps,
         nwalkers=20,
-        initial_guess=np.array([12.6, 1.6, 0.3]),
-        backend_file="chains_eta_new_stage.h5",
+        initial_guess=np.array([12.6, 2.4, 0.3]),
+        backend_file="chains_eta_new_stage3000.h5",
         parallel=True,
-        nproc=mp.cpu_count() - 3,
+        nproc=mp.cpu_count() - 2,
     )
     chain = sampler.get_chain(discard=nsteps-2000, flat=True)
     print("MCMC sampling completed.")

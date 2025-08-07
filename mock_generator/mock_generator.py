@@ -133,6 +133,8 @@ def run_mock_simulation(
         'magnitude_observedA', 'magnitude_observedB', 'm_s'
     ]].copy()
 
+    print(f"Generated {len(mock_lens_data)} lensed lenses out of {n_samples} samples.")
+
     if if_source:
         return df_lens, mock_lens_data, mock_observed_data
     else:

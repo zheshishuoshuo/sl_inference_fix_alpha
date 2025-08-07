@@ -25,6 +25,7 @@ def load_A_phys_interpolator_4d(filename='A_phys_table_4D_dummy.csv'):
         .sort_index()['A']
         .values.reshape(shape)
     )
+    print(np.sum(mu_unique), np.sum(sigma_unique), np.sum(beta_unique))
 
     interp = RegularGridInterpolator(
         (mu_unique, sigma_unique, beta_unique,),
